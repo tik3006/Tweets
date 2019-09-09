@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   
+  
   #registractionに設定
   get 'registration', to: 'users#new'
   #今のところUseの削除とユーザー名編集を考えていないのでこのルーティングとする

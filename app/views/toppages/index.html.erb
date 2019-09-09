@@ -1,3 +1,13 @@
- <div class="text-center">
-    <h1>Welcome!</h1>
-</div>
+<% if logged_in? %>
+  <div class="row">
+   
+  </div>
+<% else %>
+    <div class="text-center">
+      <h2>Welcome!</h2>
+      <h3>Do you have account?</h3>
+      <%= link_to 'Sign up now!', registration_path, class: 'btn btn-lg  btn-primary' %>
+      <h3>If you have accout</h3>
+      <%= link_to 'Log in!', login_path,class: 'btn btn-lg  btn-primary' %>
+    </div>
+<% end %>
