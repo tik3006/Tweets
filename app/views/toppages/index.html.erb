@@ -1,13 +1,27 @@
 <% if logged_in? %>
-  <div class="row">
-   
+ <div class="row">
+    <aside class="col-sm-4">
+      <%= form_with(model: @post, local: true) do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, class: 'form-control', rows: 5 %>
+        </div>
+        <%= f.submit 'Tweet', class: 'btn btn-primary btn-block' %>
+      <% end %>
+    </aside>
+    <div class="offset-sm-1 col-md-7">
+      <%= render 'posts/posts', posts: @posts %>
+    </div>
   </div>
 <% else %>
     <div class="text-center">
       <h2>Welcome!</h2>
+      <div class="mt-5">
       <h3>Do you have account?</h3>
       <%= link_to 'Sign up now!', registration_path, class: 'btn btn-lg  btn-primary' %>
+      </div>
+      <div class="mt-5">
       <h3>If you have accout</h3>
       <%= link_to 'Log in!', login_path,class: 'btn btn-lg  btn-primary' %>
+      </div>    
     </div>
 <% end %>

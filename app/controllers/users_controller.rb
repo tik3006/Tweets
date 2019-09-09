@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_user_logged_in, only: [:index, :show]
+  
   def index
    #全ユーザー表示
     @users = User.order(id: :desc).page(params[:page]).per(10)
@@ -6,13 +8,14 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.order(id: :desc).page(params[:page])
   end
 
   def new
     @user = User.new
   end
 
- def create
+  def create
     @user = User.new(user_params)
 
     if @user.save

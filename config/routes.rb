@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   
   #registractionに設定
   get 'registration', to: 'users#new'
-  #今のところUseの削除とユーザー名編集を考えていないのでこのルーティングとする
+  #今のところUserの削除とユーザー名編集を考えていないのでこのルーティングとする
   resources :users, only: [:index, :show, :create]
+  
+  resources :posts, only: [:create, :destroy]
 end
