@@ -1,7 +1,7 @@
 <header class="mb-4">
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
        <a class="navbar-brand" href="/">Microposts</a>
-       <a class="nav-item" href="users_path">User List</a>
+        <li class="navbar-brand"><%= link_to 'User List ',users_path, class: 'nav-link' %></li>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <% if logged_in? %>

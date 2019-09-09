@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_09_080853) do
+ActiveRecord::Schema.define(version: 2019_09_09_100254) do
+
+  create_table "follows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "follow_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follow_id"], name: "index_follows_on_follow_id"
+    t.index ["user_id", "follow_id"], name: "index_follows_on_user_id_and_follow_id", unique: true
+    t.index ["user_id"], name: "index_follows_on_user_id"
+  end
 
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "content"
@@ -28,5 +38,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_080853) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "follows", "follows"
+  add_foreign_key "follows", "users"
   add_foreign_key "posts", "users"
 end
