@@ -5,14 +5,14 @@ class FavoritesController < ApplicationController
   #投稿を探す
   post = Post.find(params[:post_id])
   current_user.like(post)
-  flash[:success] = 'add favorites'
+  flash[:success] = 'Add Favorite'
   redirect_to root_path
   end
 
   def destroy
   post = Post.find(params[:post_id])
   current_user.unlike(post)
-  flash[:danger] = 'Delete your favorite'
+  flash[:danger] = 'Unfavorite'
   redirect_to root_path
   end
 end
