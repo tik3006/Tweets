@@ -13,6 +13,7 @@
         <% if current_user == post.user %>
         <%= link_to "Delete", post, method: :delete, data: { confirm: "Are You sure?" } %>
         <% end %>
+         <%= render "favorites/favorite_button", post: post %>
       </div>
       </div>
     </li>

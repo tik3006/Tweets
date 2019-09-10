@@ -3,7 +3,7 @@ class FollowsController < ApplicationController
   
   def create
     user = User.find(params[:follow_id])
-    current_user.follow(user)
+    current_user.following(user)
     flash[:success] = 'follow user'
     redirect_to user
   end

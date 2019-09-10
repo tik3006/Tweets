@@ -15,21 +15,45 @@ class User < ApplicationRecord
   has_many :reverses, class_name: 'Follow', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverses, source: :user
 
- 
- def follow(other_user)
+ #favorites
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_post, through: :favorites, source: :post
+
+
+ def following(other_user)
     #フォローしようとしているユーザが自分ではないかを確認
     unless self == other_user
       self.follows.find_or_create_by(follow_id: other_user.id)
     end
  end
 
-  def unfollow(other_user)
+ def unfollow(other_user)
     follow = self.follows.find_by(follow_id: other_user.id)
-    #followしている場合フォローを解除する
     follow.destroy if follow
-  end
+ end
 
   def following?(other_user)
     self.followings.include?(other_user)
+  end
+  
+  #タイムラインの取得
+  def feed_posts
+    Post.where(user_id: self.following_ids + [self.id])
+  end
+  
+   #お気に入りの追加
+  def like(post)
+    favorites.find_or_create_by(post_id: post.id)
+  end
+  
+  #お気に入りの削除
+  def unlike(post)
+   favorite = favorites.find_by(post_id: post.id)
+   favorite.destroy if favorite
+  end 
+  
+  #お気に入りの判定
+  def liked?(post)
+    favorite_post.include?(post)
   end
 end

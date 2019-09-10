@@ -40,6 +40,14 @@ class UsersController < ApplicationController
     counts(@user)
   end
   
+   #お気に入り投稿一覧取得
+  def likes
+    @user = User.find(params[:id])
+    @favorites = @user.favorite_post.order(id: :desc).page(params[:page])
+    counts(@user)
+  end
+  
+  
   private
 
   def user_params
