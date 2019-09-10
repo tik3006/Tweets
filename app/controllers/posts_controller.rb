@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :require_user_logged_in
-  before_action :loged_in_user, only: [:destroy]
+  before_action :loged_in_user, only: [:destroy,:show,:edit,:update]
+  
   
   def create
     @post = current_user.posts.build(post_params)
@@ -21,11 +22,29 @@ class PostsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
   
+ 
+  def edit
+   
+  end
+  
+  
+  def update
+   if @post.update(post_params)
+    flash[:success] = "Your Tweet is Update"
+    redirect_to root_path
+  else
+    flash[:danger] = "Update Faild"
+    render edit
+   end
+  end
+  
+  
   private
   
   def post_params
     params.require(:post).permit(:content)
   end
+  
   
   def loged_in_user
     @post = current_user.posts.find_by(id: params[:id])

@@ -1,0 +1,12 @@
+<div class = "text-center">
+    <h1>Editing Tweet</h1>
+</div>
+    <div class="media-body">
+      <%= form_with(model: @post, local: true) do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, class: 'form-control', rows: 5 %>
+        </div>
+        <%= f.submit 'Tweet', class: 'btn btn-primary btn-block' %>
+      <% end %>
+    </div>
+
