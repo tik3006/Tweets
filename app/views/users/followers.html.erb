@@ -8,8 +8,6 @@
        <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">Followings  <span class="badge badge-secondary"><%= @count_followings %></span></a></li>
        <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">Followers  <span class="badge badge-secondary"><%= @count_followers %></span></a></li>
     </ul>
-     <div class="mt-5">    
-     <%= render 'posts/posts', posts: @posts %>
-     </div>
+     <%= render 'users/follow_and_follower', users: @followers %>
  </div>
 </div>

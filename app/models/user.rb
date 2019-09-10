@@ -12,6 +12,24 @@ class User < ApplicationRecord
   has_many :posts
   has_many :follows
   has_many :followings, through: :follows, source: :follow
-  has_many :reverses, class_name: 'Follow', foreign_key: 'follow_id'
+  has_many :reverses, class_name: 'Follow', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverses, source: :user
+
+ 
+ def follow(other_user)
+    #フォローしようとしているユーザが自分ではないかを確認
+    unless self == other_user
+      self.follows.find_or_create_by(follow_id: other_user.id)
+    end
+ end
+
+  def unfollow(other_user)
+    follow = self.follows.find_by(follow_id: other_user.id)
+    #followしている場合フォローを解除する
+    follow.destroy if follow
+  end
+
+  def following?(other_user)
+    self.followings.include?(other_user)
+  end
 end

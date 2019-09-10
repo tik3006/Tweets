@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2019_09_09_100254) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "follows", "follows"
   add_foreign_key "follows", "users"
+  add_foreign_key "follows", "users", column: "follow_id"
   add_foreign_key "posts", "users"
 end
