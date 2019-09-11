@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:index, :show,:destroy]
   
  
   def index
@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
  
+  #ユーザー情報
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.order(id: :desc).page(params[:page])
@@ -15,29 +16,35 @@ class UsersController < ApplicationController
   end
 
  
+ #ユーザーの作成
   def new
     @user = User.new
   end
 
  
+ #ユーザーの登録
   def create
     @user = User.new(user_params)
 
     if @user.save
-      flash[:success] = 'ユーザを登録しました。'
+      flash[:success] = 'User Successfull Registration'
       redirect_to @user
     else
-      flash.now[:danger] = 'ユーザの登録に失敗しました。'
+      flash.now[:danger] = 'User registration Failed'
       render :new
     end
   end
 
+ 
+ 
+ #ユーザー情報編集
   def edit
     @user = User.find(params[:id])
   end
   
+  
+  #編集の適用
   def update
-   
    @user = User.find(params[:id])
    if @user.update(user_params)
     flash[:success] = "Your Profile is Update"
@@ -47,7 +54,13 @@ class UsersController < ApplicationController
     render :edit
    end
   end
-
+  
+  #ユーザー退会
+  def destroy
+    @user = User.find_by(params[:user_id])
+  　@user.destroy
+  　flash[:success] = "See you"
+  end  
  
   def followings
     @user = User.find(params[:id])

@@ -7,18 +7,23 @@
           <%= link_to post.user.name, user_path(post.user) %> <span class="text-muted">posted at <%= post.created_at %></span>
         </div>
         <div>
+           <tbody>
+             <tr>
           <p class = "mb-0"><%= post.content %></p>
         </div>
        <div>
        <!-- Favoriteボタンは自身にも他のユーザーの投稿にも設置する -->
        <%= render "favorites/favorite_button", post: post %>
        <!-- 投稿が、自分自身の場合　--> 
+       
+      <div class ="text-right">
         <% if current_user == post.user %>
         <!-- Deleteボタンの設置 -->
-        <%= link_to "Delete", post, method: :delete, data: { confirm: "Are You sure?" } %>
+        <%= link_to "Delete", post, method: :delete, data: { confirm: "Are You sure?" }, class: 'btn btn-danger btn-sm' %>
         <!-- Editページへ遷移 -->
-        <%= link_to "Edit", edit_post_path(post.id) %>
+        <%= link_to "Edit", edit_post_path(post.id), class: 'btn btn-primary btn-sm' %>
         <% end %>
+      </div>
       </div>
       </div>
     </li>

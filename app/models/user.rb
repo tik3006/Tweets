@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_secure_password
   
   #アソシエーション
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :follows
   has_many :followings, through: :follows, source: :follow
   has_many :reverses, class_name: 'Follow', foreign_key: 'follow_id', dependent: :destroy

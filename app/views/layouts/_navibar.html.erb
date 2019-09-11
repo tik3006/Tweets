@@ -5,11 +5,12 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <% if logged_in? %>
-            <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
-             <ul class="dropdown-menu dropdown-menu-right">
+           <li class="nav-item dropdown">
+           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+           <ul class="dropdown-menu dropdown-menu-right">
            <li class="dropdown-item"><%= link_to 'Profile ',user_path(current_user)%></li>
            <li class="dropdown-item"><%= link_to "Settings", edit_user_path(current_user) %></li>
+           <li class="dropdown-item"><%= link_to "LeaveTweets", user_path(current_user), method: :delete %></li>
       </ul>
         　 <li class="nav-item"><%= link_to 'Logout', logout_path, method: :delete , data: { confirm: "LogOut?" },class: 'nav-link' %> </li>
           </li>
