@@ -11,17 +11,17 @@ class User < ApplicationRecord
   
   
   has_secure_password
-  
   #アソシエーション
+  
   has_many :posts, dependent: :destroy
-  has_many :follows
-  has_many :followings, through: :follows, source: :follow
+  has_many :follows, dependent: :destroy
+  has_many :followings, through: :follows, source: :follow, dependent: :destroy
   has_many :reverses, class_name: 'Follow', foreign_key: 'follow_id', dependent: :destroy
-  has_many :followers, through: :reverses, source: :user
+  has_many :followers, through: :reverses, source: :user, dependent: :destroy
 
  #favorites
   has_many :favorites, dependent: :destroy
-  has_many :favorite_post, through: :favorites, source: :post
+  has_many :favorite_post, through: :favorites, source: :post, dependent: :destroy
 
 
  def following(other_user)
