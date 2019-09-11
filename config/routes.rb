@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   #registractionに設定
   get 'registration', to: 'users#new'
   
-  resources :users, only: [:index, :show, :edit, :create,:destroy] do
+  resources :users  do
     member do
       get :followings
       get :followers
