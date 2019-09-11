@@ -10,10 +10,14 @@
           <p class = "mb-0"><%= post.content %></p>
         </div>
        <div>
-         <%= render "favorites/favorite_button", post: post %>
+       <!-- Favoriteボタンは自身にも他のユーザーの投稿にも設置する -->
+       <%= render "favorites/favorite_button", post: post %>
+       <!-- 投稿が、自分自身の場合　--> 
         <% if current_user == post.user %>
+        <!-- Deleteボタンの設置 -->
         <%= link_to "Delete", post, method: :delete, data: { confirm: "Are You sure?" } %>
-          <%= link_to "Edit", edit_post_path(post.id) %>
+        <!-- Editページへ遷移 -->
+        <%= link_to "Edit", edit_post_path(post.id) %>
         <% end %>
       </div>
       </div>

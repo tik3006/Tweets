@@ -1,21 +1,25 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:index, :show]
   
+ 
   def index
    #全ユーザー表示
     @users = User.order(id: :desc).page(params[:page]).per(10)
   end
 
+ 
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.order(id: :desc).page(params[:page])
     counts(@user)
   end
 
+ 
   def new
     @user = User.new
   end
 
+ 
   def create
     @user = User.new(user_params)
 
@@ -28,6 +32,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+   @user = User.find(params[:id])
+   if @user.update(user_params)
+    flash[:success] = "Your Profile is Update"
+    redirect_to root_path
+  else
+    flash[:danger] = "Update Faild"
+    render edit
+   end
+  end
+
+ 
   def followings
     @user = User.find(params[:id])
     @followings = @user.followers.page(params[:page])

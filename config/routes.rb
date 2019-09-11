@@ -10,8 +10,7 @@ Rails.application.routes.draw do
   #registractionに設定
   get 'registration', to: 'users#new'
   
-  #今のところUserの削除とユーザー名編集を考えていないのでこのルーティングとする
-  resources :users, only: [:index, :show, :create] do
+  resources :users  do
     member do
       get :followings
       get :followers
