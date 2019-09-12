@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_post, through: :favorites, source: :post, dependent: :destroy
 
+  #uploaderのマウント
+   mount_uploader :avatar, AvatarUploader
 
 
  def following(other_user)
