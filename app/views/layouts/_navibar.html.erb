@@ -10,7 +10,7 @@
            <ul class="dropdown-menu dropdown-menu-right">
            <li class="dropdown-item"><%= link_to 'Profile ',user_path(current_user)%></li>
            <li class="dropdown-item"><%= link_to "Settings", edit_user_path(current_user) %></li>
-           <li class="dropdown-item"><%= link_to "LeaveTweets", user_path(current_user), method: :delete %></li>
+           <li class="dropdown-item"><%= link_to "LeaveTweets", user_path(current_user), method: :delete , data: { confirm: "User Delete?" } %></li>
       </ul>
         　 <li class="nav-item"><%= link_to 'Logout', logout_path, method: :delete , data: { confirm: "LogOut?" },class: 'nav-link' %> </li>
           </li>

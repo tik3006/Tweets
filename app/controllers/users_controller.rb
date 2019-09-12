@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show,:destroy]
+  before_action :require_user_logged_in, only: [:index, :show]
   
  
   def index
@@ -50,16 +50,17 @@ class UsersController < ApplicationController
     flash[:success] = "Your Profile is Update"
     redirect_to root_path
   else
-    flash[:danger] = "Update Faild"
+    flash[:danger] = "Failed Update" 
     render :edit
    end
   end
-  
+
   #ユーザー退会
   def destroy
-    @user = User.find_by(params[:user_id])
-  　@user.destroy
-  　flash[:success] = "See you"
+    user = User.find(params[:id])
+    user.destroy
+    flash[:success] = "See you"
+    redirect_to root_path
   end  
  
   def followings

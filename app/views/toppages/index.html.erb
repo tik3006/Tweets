@@ -1,10 +1,10 @@
 <% if logged_in? %>
  <div class="row">
-  <aside class="col-sm-4">
-    
-    <div class="text-center">
-   <h3>Post your tweet</h3>
-    </div>
+ <aside class="col-sm-4">
+ 
+ <div class="text-center">
+ <h3><i class="far fa-paper-plane"></i>Post your tweet</h3>
+ </div>
     
       <%= form_with(model: @post, local: true) do |f| %>
         <div class="form-group">
@@ -13,12 +13,16 @@
         <%= f.submit 'Tweet', class: 'btn btn-primary btn-block' %>
       <% end %>
     </aside>
-    <div class="offset-sm-1 col-md-7">
-          <h3>Time Line</h3>
-      <%= render 'posts/posts', posts: @posts %>
-    </div>
+ 
+  <div class="offset-sm-1 col-md-7">
+   <h3><i class="far fa-comments"></i>Time Line</h3>
+   <div class = "mt-4">
+    <%= render 'posts/posts', posts: @posts %>
+   </div>
+   </div>
   </div>
-<% else %>
+  
+ <% else %>
     <div class="text-center">
       <h2>Welcome!</h2>
       <div class="mt-5">

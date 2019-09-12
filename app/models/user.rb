@@ -24,6 +24,7 @@ class User < ApplicationRecord
   has_many :favorite_post, through: :favorites, source: :post, dependent: :destroy
 
 
+
  def following(other_user)
     #フォローしようとしているユーザが自分ではないかを確認
     unless self == other_user

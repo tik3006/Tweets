@@ -1,12 +1,16 @@
 <% if current_user.liked?(post) %>
   <%= form_with( model:  current_user.favorites.find_by(post_id: post.id), local: true, method: :delete) do |f| %>
       <%= hidden_field_tag :post_id, post.id %>
-     <%= f.submit 'UnFavorite', class: 'btn btn-primary btn-sm' %>
+     <div class = "mt-6">
+     <%= f.submit 'UnFavorite', class: 'btn btn-danger btn-sm' %>
+     </div>
    <% end %>
  <% else %>
    <%= form_with(url: favorites_path, local: true) do |f| %>
       <%= hidden_field_tag :post_id, post.id %>
+     <div class = "mt-6">
      <%= f.submit 'Favorite', class: 'btn btn-primary btn-sm' %>
+     </div>
    <% end %>
 <% end %>
 

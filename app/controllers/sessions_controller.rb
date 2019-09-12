@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  
   def new
   end
 
@@ -10,10 +11,10 @@ class SessionsController < ApplicationController
     
     #login判定を行う
     if login(email, password)
-      flash[:success] = 'ログインに成功しました。'
+      flash[:success] = 'Log in'
       redirect_to @user
     else
-      flash.now[:danger] = 'ログインに失敗しました。'
+      flash.now[:danger] = 'Login Failed'
       render 'new'
     end
   end

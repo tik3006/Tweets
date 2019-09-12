@@ -34,7 +34,7 @@ class PostsController < ApplicationController
     redirect_to root_path
   else
     flash[:danger] = "Update Faild"
-    render edit
+    render edit_post_path
    end
   end
   
