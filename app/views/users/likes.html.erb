@@ -1,16 +1,22 @@
- <div class="row">
+<div class="row">
   <aside class="col-sm-3">
     <div class="card">
       <div class="card-header">
         <h3 class="card-title"><%= @user.name %></h3>
       </div>
       <div class="card-body">
-        <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+      <!-- アイコンがあれば表示するがなければ表示しないようにする-->
+       <% if @user.avatar? %>
+       <!-- アバター表示 -->
+       <%= image_tag @user.avatar.url %>
+       <% else %>
+       <!-- アバター非表示 -->
+       <%= image_tag("/images/icon/no-image.png") %>
+       <% end %>
       </div>
     </div>
  </aside>
-  <%= render 'follows/follow_button', user: @user %>
-    <div class="col-sm-8">
+    <div class="col-sm-7">
     <ul class="nav nav-pills nav-fill">
       <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>"><i class="far fa-comment-dots"></i>Tweets<span class="badge badge-secondary"><%= @count_posts %></span></a></li>
        <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>"><i class="far fa-eye"></i>Followings  <span class="badge badge-secondary"><%= @count_followings %></span></a></li>

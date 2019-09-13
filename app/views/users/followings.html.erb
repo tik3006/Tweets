@@ -1,21 +1,28 @@
- <div class="row">
+<div class="row">
   <aside class="col-sm-3">
     <div class="card">
       <div class="card-header">
         <h3 class="card-title"><%= @user.name %></h3>
       </div>
       <div class="card-body">
-        <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+      <!-- アイコンがあれば表示するがなければ表示しないようにする-->
+       <% if @user.avatar? %>
+       <!-- アバター表示 -->
+       <%= image_tag @user.avatar.url %>
+       <% else %>
+       <!-- アバター非表示 -->
+       <%= image_tag("/images/icon/no-image.png") %>
+       <% end %>
       </div>
     </div>
  </aside>
-    <div class="col-sm-8">
+    <div class="col-sm-7">
     <ul class="nav nav-pills nav-fill">
       <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>"><i class="far fa-comment-dots"></i>Tweets<span class="badge badge-secondary"><%= @count_posts %></span></a></li>
        <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>"><i class="far fa-eye"></i>Followings  <span class="badge badge-secondary"><%= @count_followings %></span></a></li>
        <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>"><i class="fal fa-handshake-alt"></i>Followers  <span class="badge badge-secondary"><%= @count_followers %></span></a></li>
        <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(likes_user_path(@user)) %>"><i class="fas fa-heart"></i>Favorites  <span class="badge badge-secondary"><%= @count_favorites %></span></a></li>
-      <%= render 'follows/follow_button', user: @user %>
+    <%= render 'follows/follow_button', user: @user %>
     </ul>
      <div class="mt-5">    
     <%= render 'users/follow_and_follower', users: @followings %>

@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  
+  #uploaderのマウント
+   mount_uploader :avatar, AvaterUploader
+  
   #メールアドレスを小文字に変換する
   before_save { self.email.downcase! }
   #Usernameは最大長は50とする
@@ -22,9 +26,6 @@ class User < ApplicationRecord
  #favorites
   has_many :favorites, dependent: :destroy
   has_many :favorite_post, through: :favorites, source: :post, dependent: :destroy
-
-  #uploaderのマウント
-   mount_uploader :avatar, AvatarUploader
 
 
  def following(other_user)

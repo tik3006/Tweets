@@ -57,5 +57,8 @@ gem 'kaminari'
 gem 'pry-byebug', group: :development
 gem 'jquery-rails'
 gem 'devise'
+#画像アップロード
 gem 'carrierwave'
-gem 'mini_magick'
+ #画像加工
+gem 'rmagick'
+ 
