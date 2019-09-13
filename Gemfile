@@ -55,10 +55,15 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari'
 gem 'pry-byebug', group: :development
-gem 'jquery-rails'
-gem 'devise'
 #画像アップロード
 gem 'carrierwave'
- #画像加工
+#画像加工
 gem 'rmagick'
- 
+# エラー画面をわかりやすく整形してくれる
+gem 'better_errors'
+# better_errorsの画面上にirb/pry(PERL)を表示する
+gem 'binding_of_caller'
+gem 'safe_yaml'
+
+#管理画面系
+gem 'devise'
